@@ -1,0 +1,15 @@
+﻿COMMIT=0188ca8adb82050af174b64cd15348d634a8b847
+isort....................................................................[42mPassed[m
+[2m- hook id: isort[m
+[2m- duration: 0.21s[m
+black....................................................................[42mPassed[m
+[2m- hook id: black[m
+[2m- duration: 0.26s[m
+
+All done! \u2728 \U0001f370 \u2728
+15 files left unchanged.
+
+flake8...................................................................[42mPassed[m
+[2m- hook id: flake8[m
+[2m- duration: 0.83s[m
+
