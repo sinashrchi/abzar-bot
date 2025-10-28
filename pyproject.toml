@@ -1,7 +1,0 @@
-[tool.black]
-line-length = 140
-
-[tool.isort]
-profile = "black"
-line_length = 140
-known_first_party = ["src"]

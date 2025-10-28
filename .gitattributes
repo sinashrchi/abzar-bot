@@ -1,12 +1,12 @@
-﻿* text=auto
-*.py      text eol=lf
-*.toml    text eol=lf
-*.json    text eol=lf
-*.yml     text eol=lf
-*.yaml    text eol=lf
-*.md      text eol=lf
-*.sh      text eol=lf
-*.ps1     text eol=crlf
-*.bat     text eol=crlf
+﻿# همهی متنها بهصورت خودکار نرمال میشوند
+* text=auto
 
-src/gs_smoketest.py text eol=lf
+# فایلهای مرسوم پروه با LF
+*.py   text eol=lf
+*.toml text eol=lf
+*.yaml text eol=lf
+*.yml  text eol=lf
+*.md   text eol=lf
+
+# اسکریپتهای PowerShell روی CRLF (اگر داشتی)
+*.ps1  text eol=crlf

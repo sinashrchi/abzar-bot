@@ -12,7 +12,9 @@ import re
 import time
 from typing import Dict, List, Optional
 
-from .gs_client import _open_ws  # Ø§Ø³ØªÙØ§Ø¯Ù‡ ØµØ±ÙØ§Ù‹ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ§Ù†Ø¯Ù† Ù‡Ø¯Ø±Ù‡Ø§ÛŒ ÙˆØ§Ù‚Ø¹ÛŒ Ø´ÛŒØª
+from .gs_client import (
+    _open_ws,  # Ø§Ø³ØªÙØ§Ø¯Ù‡ ØµØ±ÙØ§Ù‹ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ§Ù†Ø¯Ù† Ù‡Ø¯Ø±Ù‡Ø§ÛŒ ÙˆØ§Ù‚Ø¹ÛŒ Ø´ÛŒØª
+)
 from .gs_client import (
     append_order,
     read_config_bot,
@@ -57,7 +59,7 @@ def _build_header_map(headers: List[str]) -> Dict[str, str]:
 
 def _pick(header_map: Dict[str, str], *candidates: str) -> Optional[str]:
     """
-    Ø¨Ø§ ØªÙˆØ¬Ù‡ Ø¨Ù‡ Ù„ÛŒØ³Øª Ú©Ø§Ù†Ø¯ÛŒØ¯Ù‡Ø§ (canonical)ØŒ Ø§ÙˆÙ„ÛŒÙ† Ù…ÙˆØ±Ø¯ÛŒ Ú©Ù‡ Ø¯Ø± map Ù‡Ø³Øª Ø±Ø§ Ø¨Ø±Ù…ÛŒâ€ŒÚ¯Ø±Ø¯Ø§Ù†Ø¯.
+    Ø¨Ø§ ØªÙˆØ¬Ù‡ Ø¨Ù‡ Ù„ÛŒØ³Øª Ú©Ø§Ù†Ø¯ÛŒØ¯Ù‡Ø§ (canonical)ØŒ Ø§ÙˆÙ„ÛŒÙ† Ù…ÙˆØ±Ø¯ÛŒ Ú©Ù‡ Ø¯Ø± map Ù‡Ø³Øª Ø±Ø§ Ø¨Ø±Ù…ÛŒâ€ŒÚ¯Ø±Ø¯Ø§Ù†Ø¯.  # noqa: E501
     """
     for c in candidates:
         key = _canon(c)
@@ -105,7 +107,9 @@ def main() -> None:
         "order_no",
         "order id",
     )
-    col_type = _pick(header_map, "Ù†ÙˆØ¹", "Ù†ÙˆØ¹ Ø®Ø±Ø¯Ù‡/Ø¹Ù…Ø¯Ù‡", "type", "channel")
+    col_type = _pick(
+        header_map, "Ù†ÙˆØ¹", "Ù†ÙˆØ¹ Ø®Ø±Ø¯Ù‡/Ø¹Ù…Ø¯Ù‡", "type", "channel"
+    )
     col_customer_code = _pick(header_map, "Ú©Ø¯ Ù…Ø´ØªØ±ÛŒ", "customer code")
     col_telegram_id = _pick(header_map, "ØªÙ„Ú¯Ø±Ø§Ù… id", "telegram id", "telegram_id")
     col_receiver = _pick(
@@ -124,18 +128,28 @@ def main() -> None:
         "Ø´Ù…Ø§Ø±Ù‡ ØªÙ…Ø§Ø³",
     )
     col_address = _pick(header_map, "Ø¢Ø¯Ø±Ø³", "Ø§Ø¯Ø±Ø³", "address")
-    col_postal = _pick(header_map, "Ú©Ø¯Ù¾Ø³ØªÛŒ", "Ú©Ø¯ Ù¾Ø³ØªÛŒ", "postal code", "postcode")
-    col_items = _pick(header_map, "Ø§Ù‚Ù„Ø§Ù…", "Ø§Ù‚Ù„Ø§Ù… json", "items", "items json", "items_json")
+    col_postal = _pick(
+        header_map, "Ú©Ø¯Ù¾Ø³ØªÛŒ", "Ú©Ø¯ Ù¾Ø³ØªÛŒ", "postal code", "postcode"
+    )
+    col_items = _pick(
+        header_map, "Ø§Ù‚Ù„Ø§Ù…", "Ø§Ù‚Ù„Ø§Ù… json", "items", "items json", "items_json"
+    )
     col_total = _pick(header_map, "Ø¬Ù…Ø¹ Ú©Ù„", "total", "amount", "final total")
     col_payment_method = _pick(header_map, "Ø±ÙˆØ´ Ù¾Ø±Ø¯Ø§Ø®Øª", "payment method")
     col_status = _pick(header_map, "ÙˆØ¶Ø¹ÛŒØª", "status", "ÙˆØ¶Ø¹ÛŒØª Ø³ÙØ§Ø±Ø´")
-    col_created_at = _pick(header_map, "ØªØ§Ø±ÛŒØ® Ø«Ø¨Øª", "created at", "created_at", "date")
-    col_receipt_url = _pick(header_map, "Ø±Ø³ÛŒØ¯ url", "Ø±Ø³ÛŒØ¯", "receipt url", "receipt_url")
+    col_created_at = _pick(
+        header_map, "ØªØ§Ø±ÛŒØ® Ø«Ø¨Øª", "created at", "created_at", "date"
+    )
+    col_receipt_url = _pick(
+        header_map, "Ø±Ø³ÛŒØ¯ url", "Ø±Ø³ÛŒØ¯", "receipt url", "receipt_url"
+    )
     col_note = _pick(header_map, "ÛŒØ§Ø¯Ø¯Ø§Ø´Øª", "note", "notes", "ØªÙˆØ¶ÛŒØ­Ø§Øª")
 
     # Ø­Ø¯Ø§Ù‚Ù„ Ù„Ø§Ø²Ù… Ø¯Ø§Ø±ÛŒÙ…: Ø´Ù…Ø§Ø±Ù‡ Ø³ÙØ§Ø±Ø´ + ÙˆØ¶Ø¹ÛŒØª (Ø¨Ø±Ø§ÛŒ Ø¢Ù¾Ø¯ÛŒØª Ø¨Ø¹Ø¯ÛŒ)
     if not col_order_no or not col_status:
-        print("orders sheet headers are missing required columns (order_no/status). aborting.")
+        print(
+            "orders sheet headers are missing required columns (order_no/status). aborting."
+        )
         return
 
     print("\n== APPEND TEST ORDER ==")
@@ -152,7 +166,7 @@ def main() -> None:
     ]
     items_json = json.dumps(items_payload, ensure_ascii=False)
 
-    # Ø¯ÛŒÚ©Ø´Ù†Ø±ÛŒ Ø¨Ø§ Ú©Ù„ÛŒØ¯Ù‡Ø§ÛŒ ÙˆØ§Ù‚Ø¹ÛŒ Ù‡Ø¯Ø±Ù‡Ø§ (Ù‡Ø± Ú©Ø¯ÙˆÙ… Ø§Ú¯Ø± ÛŒØ§ÙØª Ù†Ø´Ø¯ØŒ Ø³Øª Ù†Ù…ÛŒâ€ŒØ´ÙˆØ¯)
+    # Ø¯ÛŒÚ©Ø´Ù†Ø±ÛŒ Ø¨Ø§ Ú©Ù„ÛŒØ¯Ù‡Ø§ÛŒ ÙˆØ§Ù‚Ø¹ÛŒ Ù‡Ø¯Ø±Ù‡Ø§ (Ù‡Ø± Ú©Ø¯ÙˆÙ… Ø§Ú¯Ø± ÛŒØ§ÙØª Ù†Ø´Ø¯ØŒ Ø³Øª Ù†Ù…ÛŒâ€ŒØ´ÙˆØ¯)  # noqa: E501
     row: Dict[str, str] = {}
     row[col_order_no] = order_no
     if col_type:

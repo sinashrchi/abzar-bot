@@ -50,7 +50,10 @@ def _log(event: str, **meta: Any) -> None:
 def _authorize() -> gspread.Client:
     creds_path = os.getenv("GOOGLE_SHEETS_CREDENTIALS", "./credentials.json")
     if not os.path.isfile(creds_path):
-        raise FileNotFoundError("credentials file not found: " f"{creds_path} (set GOOGLE_SHEETS_CREDENTIALS to your service-account JSON)")
+        raise FileNotFoundError(
+            "credentials file not found: "
+            f"{creds_path} (set GOOGLE_SHEETS_CREDENTIALS to your service-account JSON)"
+        )  # noqa: E501
     scopes = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive",
@@ -354,7 +357,9 @@ def append_order(row: Dict[str, Any] | List[Any]) -> int:
     return row_idx
 
 
-def update_order_status(order_no: str, status: str, extra: Optional[str] = None) -> bool:
+def update_order_status(
+    order_no: str, status: str, extra: Optional[str] = None
+) -> bool:
     """
     Update status (and optional 'extra'/notes) for a given order_no.
     Header detection is alias-based and works with Persian/English headers.
@@ -368,10 +373,16 @@ def update_order_status(order_no: str, status: str, extra: Optional[str] = None)
 
     col_order = _find_col_index(headers_raw, _ORDER_ALIASES["order_no"])
     col_status = _find_col_index(headers_raw, _ORDER_ALIASES["status"])
-    col_extra = _find_col_index(headers_raw, _ORDER_ALIASES["extra"]) if extra is not None else None
+    col_extra = (
+        _find_col_index(headers_raw, _ORDER_ALIASES["extra"])
+        if extra is not None
+        else None
+    )
 
     if col_order is None or col_status is None:
-        _log("update_order_status_noheaders", order_col=col_order, status_col=col_status)
+        _log(
+            "update_order_status_noheaders", order_col=col_order, status_col=col_status
+        )
         return False
 
     target_row: Optional[int] = None
