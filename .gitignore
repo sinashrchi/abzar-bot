@@ -1,2 +1,10 @@
 ﻿.pre-commit-home/
 .pre-commit-cache/
+# secrets
+credentials.json
+credentials/*.json
+.env
+*.pem
+*.p12
+*.key
+*.crt
