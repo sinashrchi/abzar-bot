@@ -1,0 +1,10 @@
+﻿[tool.black]
+line-length = 88
+target-version = ["py311","py312","py313","py314"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+known_first_party = ["src"]
+combine_as_imports = true
+skip_gitignore = true

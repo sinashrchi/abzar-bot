@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Smoketest",
+      "type": "python",
+      "request": "launch",
+      "module": "src.gs_smoketest",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "envFile": "${workspaceFolder}\\.env",
+      "python": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+    }
+  ]
+}
