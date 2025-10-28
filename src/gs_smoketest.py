@@ -12,9 +12,7 @@ import re
 import time
 from typing import Dict, List, Optional
 
-from .gs_client import (
-    _open_ws,  # Ø§Ø³ØªÙØ§Ø¯Ù‡ ØµØ±ÙØ§Ù‹ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ§Ù†Ø¯Ù† Ù‡Ø¯Ø±Ù‡Ø§ÛŒ ÙˆØ§Ù‚Ø¹ÛŒ Ø´ÛŒØª
-)
+from .gs_client import _open_ws  # Ø§Ø³ØªÙØ§Ø¯Ù‡ ØµØ±ÙØ§Ù‹ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ§Ù†Ø¯Ù† Ù‡Ø¯Ø±Ù‡Ø§ÛŒ ÙˆØ§Ù‚Ø¹ÛŒ Ø´ÛŒØª
 from .gs_client import (
     append_order,
     read_config_bot,
@@ -99,35 +97,25 @@ def main() -> None:
     header_map = _build_header_map(headers)
 
     # Ù…Ø¹Ø§Ø¯Ù„â€ŒÙ‡Ø§ÛŒ Ú©ÙŽÙ†ÙÙ†ÛŒÚ©Ø§Ù„ Ú©Ù‡ Ù…ÛŒâ€ŒØ®ÙˆØ§Ù‡ÛŒÙ… Ù¾ÙØ± Ú©Ù†ÛŒÙ…:
-    col_order_no = _pick(
-        header_map, "Ø´Ù…Ø§Ø±Ù‡ Ø³ÙØ§Ø±Ø´", "order no", "order number", "order_no", "order id"
-    )
+    col_order_no = _pick(header_map, "Ø´Ù…Ø§Ø±Ù‡ Ø³ÙØ§Ø±Ø´", "order no", "order number", "order_no", "order id")
     col_type = _pick(header_map, "Ù†ÙˆØ¹", "Ù†ÙˆØ¹ Ø®Ø±Ø¯Ù‡/Ø¹Ù…Ø¯Ù‡", "type", "channel")
     col_customer_code = _pick(header_map, "Ú©Ø¯ Ù…Ø´ØªØ±ÛŒ", "customer code")
     col_telegram_id = _pick(header_map, "ØªÙ„Ú¯Ø±Ø§Ù… id", "telegram id", "telegram_id")
-    col_receiver = _pick(
-        header_map, "Ù†Ø§Ù… Ú¯ÛŒØ±Ù†Ø¯Ù‡", "Ù†Ø§Ù… Ú¯ÙŠØ±Ù†Ø¯Ù‡", "receiver name", "customer_name"
-    )
+    col_receiver = _pick(header_map, "Ù†Ø§Ù… Ú¯ÛŒØ±Ù†Ø¯Ù‡", "Ù†Ø§Ù… Ú¯ÙŠØ±Ù†Ø¯Ù‡", "receiver name", "customer_name")
     col_mobile = _pick(header_map, "Ù…ÙˆØ¨Ø§ÛŒÙ„", "Ù…ÙˆØ¨Ø§ÙŠÙ„", "phone", "mobile", "Ø´Ù…Ø§Ø±Ù‡ ØªÙ…Ø§Ø³")
     col_address = _pick(header_map, "Ø¢Ø¯Ø±Ø³", "Ø§Ø¯Ø±Ø³", "address")
     col_postal = _pick(header_map, "Ú©Ø¯Ù¾Ø³ØªÛŒ", "Ú©Ø¯ Ù¾Ø³ØªÛŒ", "postal code", "postcode")
-    col_items = _pick(
-        header_map, "Ø§Ù‚Ù„Ø§Ù…", "Ø§Ù‚Ù„Ø§Ù… json", "items", "items json", "items_json"
-    )
+    col_items = _pick(header_map, "Ø§Ù‚Ù„Ø§Ù…", "Ø§Ù‚Ù„Ø§Ù… json", "items", "items json", "items_json")
     col_total = _pick(header_map, "Ø¬Ù…Ø¹ Ú©Ù„", "total", "amount", "final total")
     col_payment_method = _pick(header_map, "Ø±ÙˆØ´ Ù¾Ø±Ø¯Ø§Ø®Øª", "payment method")
     col_status = _pick(header_map, "ÙˆØ¶Ø¹ÛŒØª", "status", "ÙˆØ¶Ø¹ÛŒØª Ø³ÙØ§Ø±Ø´")
     col_created_at = _pick(header_map, "ØªØ§Ø±ÛŒØ® Ø«Ø¨Øª", "created at", "created_at", "date")
-    col_receipt_url = _pick(
-        header_map, "Ø±Ø³ÛŒØ¯ url", "Ø±Ø³ÛŒØ¯", "receipt url", "receipt_url"
-    )
+    col_receipt_url = _pick(header_map, "Ø±Ø³ÛŒØ¯ url", "Ø±Ø³ÛŒØ¯", "receipt url", "receipt_url")
     col_note = _pick(header_map, "ÛŒØ§Ø¯Ø¯Ø§Ø´Øª", "note", "notes", "ØªÙˆØ¶ÛŒØ­Ø§Øª")
 
     # Ø­Ø¯Ø§Ù‚Ù„ Ù„Ø§Ø²Ù… Ø¯Ø§Ø±ÛŒÙ…: Ø´Ù…Ø§Ø±Ù‡ Ø³ÙØ§Ø±Ø´ + ÙˆØ¶Ø¹ÛŒØª (Ø¨Ø±Ø§ÛŒ Ø¢Ù¾Ø¯ÛŒØª Ø¨Ø¹Ø¯ÛŒ)
     if not col_order_no or not col_status:
-        print(
-            "orders sheet headers are missing required columns (order_no/status). aborting."
-        )
+        print("orders sheet headers are missing required columns (order_no/status). aborting.")
         return
 
     print("\n== APPEND TEST ORDER ==")
@@ -189,5 +177,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
