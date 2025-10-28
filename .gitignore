@@ -8,3 +8,11 @@ credentials/*.json
 *.p12
 *.key
 *.crt
+# secrets
+credentials.json
+credentials/*.json
+.env
+*.pem
+*.p12
+*.key
+*.crt
