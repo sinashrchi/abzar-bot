@@ -97,12 +97,32 @@ def main() -> None:
     header_map = _build_header_map(headers)
 
     # Ù…Ø¹Ø§Ø¯Ù„â€ŒÙ‡Ø§ÛŒ Ú©ÙŽÙ†ÙÙ†ÛŒÚ©Ø§Ù„ Ú©Ù‡ Ù…ÛŒâ€ŒØ®ÙˆØ§Ù‡ÛŒÙ… Ù¾ÙØ± Ú©Ù†ÛŒÙ…:
-    col_order_no = _pick(header_map, "Ø´Ù…Ø§Ø±Ù‡ Ø³ÙØ§Ø±Ø´", "order no", "order number", "order_no", "order id")
+    col_order_no = _pick(
+        header_map,
+        "Ø´Ù…Ø§Ø±Ù‡ Ø³ÙØ§Ø±Ø´",
+        "order no",
+        "order number",
+        "order_no",
+        "order id",
+    )
     col_type = _pick(header_map, "Ù†ÙˆØ¹", "Ù†ÙˆØ¹ Ø®Ø±Ø¯Ù‡/Ø¹Ù…Ø¯Ù‡", "type", "channel")
     col_customer_code = _pick(header_map, "Ú©Ø¯ Ù…Ø´ØªØ±ÛŒ", "customer code")
     col_telegram_id = _pick(header_map, "ØªÙ„Ú¯Ø±Ø§Ù… id", "telegram id", "telegram_id")
-    col_receiver = _pick(header_map, "Ù†Ø§Ù… Ú¯ÛŒØ±Ù†Ø¯Ù‡", "Ù†Ø§Ù… Ú¯ÙŠØ±Ù†Ø¯Ù‡", "receiver name", "customer_name")
-    col_mobile = _pick(header_map, "Ù…ÙˆØ¨Ø§ÛŒÙ„", "Ù…ÙˆØ¨Ø§ÙŠÙ„", "phone", "mobile", "Ø´Ù…Ø§Ø±Ù‡ ØªÙ…Ø§Ø³")
+    col_receiver = _pick(
+        header_map,
+        "Ù†Ø§Ù… Ú¯ÛŒØ±Ù†Ø¯Ù‡",
+        "Ù†Ø§Ù… Ú¯ÙŠØ±Ù†Ø¯Ù‡",
+        "receiver name",
+        "customer_name",
+    )
+    col_mobile = _pick(
+        header_map,
+        "Ù…ÙˆØ¨Ø§ÛŒÙ„",
+        "Ù…ÙˆØ¨Ø§ÙŠÙ„",
+        "phone",
+        "mobile",
+        "Ø´Ù…Ø§Ø±Ù‡ ØªÙ…Ø§Ø³",
+    )
     col_address = _pick(header_map, "Ø¢Ø¯Ø±Ø³", "Ø§Ø¯Ø±Ø³", "address")
     col_postal = _pick(header_map, "Ú©Ø¯Ù¾Ø³ØªÛŒ", "Ú©Ø¯ Ù¾Ø³ØªÛŒ", "postal code", "postcode")
     col_items = _pick(header_map, "Ø§Ù‚Ù„Ø§Ù…", "Ø§Ù‚Ù„Ø§Ù… json", "items", "items json", "items_json")

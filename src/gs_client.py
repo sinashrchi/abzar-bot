@@ -50,9 +50,7 @@ def _log(event: str, **meta: Any) -> None:
 def _authorize() -> gspread.Client:
     creds_path = os.getenv("GOOGLE_SHEETS_CREDENTIALS", "./credentials.json")
     if not os.path.isfile(creds_path):
-        raise FileNotFoundError(
-            "credentials file not found: " f"{creds_path} (set GOOGLE_SHEETS_CREDENTIALS to your service-account JSON)"
-        )
+        raise FileNotFoundError("credentials file not found: " f"{creds_path} (set GOOGLE_SHEETS_CREDENTIALS to your service-account JSON)")
     scopes = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive",
